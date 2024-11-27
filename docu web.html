@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entre Madres</title>
+    <style>
+        /* Fondo general de la página */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: rgb(85,85,85);
+            background: radial-gradient(circle, rgba(85,85,85,1) 0%, rgba(52,52,52,1) 100%);
+            min-height: 100vh;
+            width: 100%;
+        }
+        #image {
+            width: 600px;
+            height: 1937px;
+            display: block;
+            margin: auto;
+        }
+
+        #videoModal {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 200%;
+            height: 200%;
+            background-color: transparent;
+            z-index: 20;
+            justify-content: center;
+            align-items: center;
+            transform: translate(-50%, -50%);
+        }
+
+       /* Fondo general de la página */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: rgb(120,120,120);
+    background: radial-gradient(circle, rgba(120,120,120,1) 0%, rgba(85,84,84,1) 100%);
+    min-height: 100vh;
+    width: 100%;
+}
+
+.splash-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100; /* Mantén un z-index alto cuando está visible */
+    cursor: pointer;
+}
+
+.splash-text-box {
+    background-color: rgba(150, 150, 150, 0.637); /* Fondo con algo de transparencia */
+    padding: 50px;
+    border-radius: 60px; /* Bordes más redondeados */
+    text-align: justify;
+    color: #d8d8d8;
+    max-width: 55%;
+    font-size: 1.5em;
+    box-shadow: 0px 0px 100px rgb(150, 150, 150); /* Sombra difusa */
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 2.5s ease, transform 2.5s ease-out;
+}
+
+.splash-text-box.show {
+    opacity: 1; /* Hacerlo visible */
+    transform: translateY(0); /* Regresar a su posición original */
+}
+
+/* Al hacer clic en la pantalla de bienvenida, se oculta */
+.splash-screen.hidden {
+    display: none;
+    z-index: 1; /* Z-index bajo cuando se oculta */
+}
+
+/* Estilo de las pestañas */
+.tab-container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+    z-index: 10; /* Asegura que las pestañas siempre sean visibles */
+}
+
+/* Contenido de las pestañas */
+.tab-content {
+    position: absolute;
+    top: 80px;
+    right: 20px;
+    width: 300px;
+    padding: 10px;
+    background-color: rgba(131, 131, 131, 0.8);
+    border-radius: 16px;
+    box-shadow: 0 4px 6px rgba(131, 131, 131, 0.8);
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+        /* Estilo para el título principal */
+        @font-face {
+            font-family: "EntreMadres";
+            src: url("c:\Users\Agustina Pilar\Desktop\docu pav\adelia.ttf") format("opentype");
+        }
+
+        /* Clase para ocultar elementos antes de mostrarlos */
+         .fade { 
+            opacity: 0;
+            transition: opacity 2.5s ease; /* Duración y tipo de transición */
+        }
+
+         .fade.show {
+             opacity: 1;
+            }
+
+        h1.title-main {
+            font-family: "EntreMadres", Arial, sans-serif;
+            text-align: left; 
+            color: #7c7c7c;
+            font-size: 1.5em; 
+            margin-left: 20px;
+        }
+
+        #main-content {
+            display: none;
+        }
+
+        /* Ocultar la segunda pantalla splash inicialmente */
+        #second-splash {
+    display: none; /* Oculto inicialmente */
+    align-items: center;
+    justify-content: center;
+}
+        #second-splash.show {
+    display: flex; /* Muestra la pantalla */
+} 
+   
+    /* Contenedor de pestañas - Posicionado en la esquina superior derecha */
+    /* Estilo para las pestañas */
+.tab-container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+    z-index: 1;
+}
+
+/* Estilo de las pestañas */
+.tab {
+    padding: 10px;
+    background-color: #a1a1a163;
+    color: rgb(63, 63, 63);
+    cursor: pointer;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+    z-index: 1;
+}
+
+.tab:hover {
+    background-color: #858585;
+}
+
+/* Contenido de las pestañas */
+.tab-content {
+    position: absolute;
+    top: 80px;
+    right: 20px;
+    width: 40%;  /* Ajusta el ancho para hacerlo más estrecho */
+    height: 82%;  /* Ajusta la altura para hacerlo más largo que ancho */
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: none;
+    font-size: 0.8em; /* Tamaño de letra por defecto */
+    line-height: 1.6; /* Espaciado entre líneas */
+    z-index: 2;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* Para los párrafos dentro de las pestañas */
+.tab-content p {
+    margin-bottom: 15px;  /* Espacio entre párrafos */
+    font-size: 1.0em;  /* Puedes cambiar el tamaño aquí */
+    color: #333;  /* Color de texto */
+}
+
+/* Encabezados dentro de las pestañas */
+.tab-content h2 {
+    font-size: 1.5em; /* Tamaño de los encabezados */
+    margin-bottom: 15px; /* Espacio debajo del encabezado */
+    color: #333;
+    text-align: left;
+}
+
+</style>
+    </style>
+</head>
+<body>
+    <!-- Pantalla de bienvenida (Primera) -->
+    <div id="splashScreen" class="splash-screen" onclick="showSecondSplash()">
+        <div class="splash-text-box">
+            <p>"Entre Madres" es un proyecto documental que tiene como propósito registrar testimonios y experiencias dentro del universo de la maternidad. Su objetivo es crear un espacio común donde las madres puedan sentirse acompañadas, compartir sentimientos y vivencias que, en ocasiones, resultan difíciles de expresar abiertamente en nuestra sociedad.</p>
+        </div>
+    </div>
+
+    <!-- Pantalla de bienvenida (Segunda) -->
+    <div id="second-splash" class="splash-screen" onclick="hideSecondSplash()">
+        <div class="splash-text-box">
+            <p>“[. . .] entender el amor materno a la luz de otras formas de cuidado que sostienen este vínculo maleable, podrá permitirnos pensar el amor que nos une a nuestras criaturas como algo más liviano, piadoso, alegre, dando lugar, incluso, a la furia, al rechazo, a la frustración y al equívoco.” - (Buffone, 2020, p.184).</p>
+        </div>
+    </div>
+
+    <!-- Contenido principal -->
+    <div id="main-content" class="fade">
+        <h1 class="title-main">Entre Madres</h1>
+       
+        <img id="imagen"
+        src="c:\Users\Agustina Pilar\Desktop\docu pav\dibujo 2.png" 
+        alt="Cuerpo femenino hecho con líneas que refieren a un mapa" 
+        width="600" height="1937" 
+        style="display: block; margin: auto;" usemap="#mapa-cuerpo">
+    
+        <map name="mapa-cuerpo">
+            <area shape="rect" coords="498,532,528,564" href="#" alt="Video" onclick="openVideoModal(event)">
+            <area shape="rect" coords="413,913,386,884" href="#" alt="Audio" onclick="showAudioPlayer(event)">
+            <area shape="rect" coords="535,511,512,491" href="#" alt="Audio" onclick="showAudioPlayer2(event)">
+            <area shape="rect" coords="418,704,448,736" href="#" alt="Cuadro de texto" onclick="showTextBox(event)">
+            <area shape="rect" coords="424,777,397,748" href="#" alt="Cuadro de texto" onclick="showTextBox2(event)">
+            <area shape="rect" coords="408,821,381,792" href="#" alt="Cuadro de texto" onclick="showTextBox3(event)">
+            <area shape="rect" coords="32,931,5,902" href="#" alt="Cuadro de texto" onclick="showTextBox4(event)">
+            <area shape="rect" coords="436,955,409,926" href="#" alt="Cuadro de texto" onclick="showTextBox5(event)">
+            <area shape="rect" coords="27,979,0,950" href="#" alt="Cuadro de texto" onclick="showTextBox6(event)">
+            <area shape="rect" coords="25,1026,2,1000" href="#" alt="Cuadro de texto" onclick="showTextBox7(event)">
+        </map>
+
+        <div id="textBox" style="display: none; position: absolute; top: 200px; left: 50%; transform: translate(-50%, 0); background-color: rgba(255, 255, 255, 0.9); border: 1px solid #ccc; border-radius: 8px; padding: 10px; max-width: 300px; text-align: center; z-index: 30;">
+            <p>Me está afectando muchísimo con la organización para estudiar, cumplir con las prácticas y a la vez rendir bien a nivel académico ya que mi cuerpo también requiere descanso. Tranquilidad que lo vas a lograr, tal vez no al mismo ritmo que antes, no al mismo ritmo de otros pero lo vas a lograr.</p>
+            <p>Laura. 28 años.</p>
+            <button onclick="closeTextBox()">Cerrar</button>
+        </div>
+       
+        <div id="textBox2" style="display: none; position: absolute; top: 200px; left: 50%; transform: translate(-50%, 0); background-color: rgba(255, 255, 255, 0.9); border: 1px solid #ccc; border-radius: 8px; padding: 10px; max-width: 300px; text-align: center; z-index: 30;">
+            <p>Es muy complejo cuando debes volver a trabajar y tu bebé tiene 3 meses. Uno se replantea en ese momento el haber gestado porque el sistema no entiende ni comprende el trabajo que es ser madre. La lactancia y el trabajo son cuestiones que no pueden llegar a un punto común. Soy docente y recuerdo sacarme leche en el baño de la escuela porque se me llenaban las tetas de leche, nadie comería en el baño pero a mí me daban ese lugar porque no había otro.</p>
+            <button onclick="closeTextBox2()">Cerrar</button>
+        </div>
+
+        <div id="textBox3" style="display: none; position: absolute; top: 200px; left: 50%; transform: translate(-50%, 0); background-color: rgba(255, 255, 255, 0.9); border: 1px solid #ccc; border-radius: 8px; padding: 10px; max-width: 300px; text-align: center; z-index: 30;">
+            <p>El primer trimestre del embarazo no pude cursar por los vómitos. Cuando nació mi primera hija todavía era estudiante, de día alternábamos con mi esposo para cuidarla y que yo fuera a la facultad. Estudiaba por las noches, mientras ella dormía, entre tomas porque tomaba el pecho. Iba a clase y en los recreos regresaba para darle el pecho. Luego a pesar de que parezca difícil la carrera me fue mejor que nunca. Era más pragmática, usaba el tiempo efectivamente y sobretodo tenía una necesidad de acabar imperiosa. Tenía un para qué finalizar mis estudios y eso me hizo encontrar el cómo.</p>
+            <p>Después como psicóloga siempre trabajé desde casa porque es más fácil para cuidar a mis 3 hijos. A veces cuando estoy en videollamada con algún paciente han entrado en la habitación interrumpiendo la sesión; algunos pacientes no tiene problema y otros si.</p>
+            <p>Claudia. 51 años.</p>
+            <button onclick="closeTextBox3()">Cerrar</button>
+        </div>
+
+        <div id="textBox4" style="display: none; position: absolute; top: 200px; left: 50%; transform: translate(-50%, 0); background-color: rgba(255, 255, 255, 0.9); border: 1px solid #ccc; border-radius: 8px; padding: 10px; max-width: 300px; text-align: center; z-index: 30;">
+            <p>La relación con mi pareja fue difícil... Los hombres sienten celos de la fusión que tenemos con nuestros hijos y deberían analizar sus infancia y cuanta entrega tuvieron sus madres para con ellos para no proyectar sobre sus parejas y tratar inconscientemente de separar a la mama del bebe. Retomar la vida sexual es difícil...les cuesta entender que nuestro cuerpo cambió y que hay que navegar una nueva sexualidsd! Un gran desafío!</p>
+            <p>Romina. 46 años.</p>
+            <button onclick="closeTextBox4()">Cerrar</button>
+        </div>
+
+        <div id="textBox5" style="display: none; position: absolute; top: 200px; left: 50%; transform: translate(-50%, 0); background-color: rgba(255, 255, 255, 0.9); border: 1px solid #ccc; border-radius: 8px; padding: 10px; max-width: 300px; text-align: center; z-index: 30;">
+            <p>Cuando fui madre varias cosas cambiaron conmigo misma. Sentía que tenía que madurar, ser más responsable, me cuestionaba que por momentos no tenía la paciencia y calma necesaria.
+                ( Laura. 36 años. )
+            </p>
+            <button onclick="closeTextBox5()">Cerrar</button>
+        </div>
+
+        <div id="textBox6" style="display: none; position: absolute; top: 200px; left: 50%; transform: translate(-50%, 0); background-color: rgba(255, 255, 255, 0.9); border: 1px solid #ccc; border-radius: 8px; padding: 10px; max-width: 300px; text-align: center; z-index: 30;">
+            <p> Con mi pareja nos sentimos muy unidos, nos apoyábamos para que cada uno de nosotros pudiera finalizar sus estudios y encauzar su carrera. Ahora estamos más unidos que nunca, además de pareja tenemos una familia. Es más difícil tener tiempo solos pero cuando lo tenemos es de gran valor a pesar de que a veces estamos agotados y bostezamos en el teatro, cine, restaurante…</p>
+            <button onclick="closeTextBox6()">Cerrar</button>
+        </div>
+
+        <div id="textBox7" style="display: none; position: absolute; top: 200px; left: 50%; transform: translate(-50%, 0); background-color: rgba(255, 255, 255, 0.9); border: 1px solid #ccc; border-radius: 8px; padding: 10px; max-width: 300px; text-align: center; z-index: 30;">
+            <p>La relación con tu pareja cambia. La más grave para mí, es el deseo incansable del hombre de querer tener sexo muchas más veces que la mujer. Y nosotras nos sentimos con una exigencia más en lugar de que tú pareja te alivie la carga mental y física. Tu prioridad cambia por lo que tu deseo sexual cambia. Te dedicas exclusivamente a ese bebé, estas cansada, agotada y muchas parejas no entienden,  exigen que estés para ellos. Necesité más empatía emocional de mi pareja. En la mayoría de las mujeres la libido baja y si la otra persona no entiende eso se complica. Tarda 2 años el cuerpo de la mujer en volver a su lugar y si la persona que está con vos no lo entiende, hay problemas.</p>
+            <button onclick="closeTextBox7()">Cerrar</button>
+        </div>
+
+        <div id="videoModal" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.8); z-index: 20; justify-content: center; align-items: center;">
+            <div style="position: relative; width: 80%; max-width: 600px;">
+                <button onclick="closeVideoModal()" style="position: absolute; top: -10px; right: -10px; background-color: #fff; border: none; border-radius: 50%; padding: 5px 10px; cursor: pointer;">&times;</button>
+                <video id="videoContent" controls style="width: 100%;">
+                    <source src="c:\Users\Agustina Pilar\Desktop\docu pav\Testimonio1.mp4" type="video/mp4">
+                    Tu navegador no soporta videos.
+                </video>
+            </div>
+        </div>
+
+        <div id="audioPlayer" style="display: none; position: absolute; top: 200px; left: 50%; transform: translate(-50%, 0); background-color: rgba(255, 255, 255, 0.9); border: 1px solid #ccc; border-radius: 8px; padding: 10px; max-width: 300px; text-align: center; z-index: 30;">
+            <audio controls>
+                <source src="c:\Users\Agustina Pilar\Desktop\docu pav\audio-relacion-con-una-misma.mp3" type="audio/mpeg">
+            </audio>
+            <button onclick="closeAudioPlayer()">Cerrar</button>
+        </div>
+
+        <div id="audioPlayer2" style="display: none; position: absolute; top: 200px; left: 50%; transform: translate(-50%, 0); background-color: rgba(255, 255, 255, 0.9); border: 1px solid #ccc; border-radius: 8px; padding: 10px; max-width: 300px; text-align: center; z-index: 30;">
+            <audio controls>
+                <source src="c:\Users\Agustina Pilar\Desktop\docu pav\audio-no-puede-ser-madre_1.mp3" type="audio/mpeg">
+            </audio>
+            <button onclick="closeAudioPlayer2()">Cerrar</button>
+        </div>
+
+        <!-- Contenedor de pestañas -->
+        <div class="tab-container">
+            <div class="tab" onclick="showTabContent('content1')">Sobre el proyecto</div>
+            <div class="tab" onclick="showTabContent('content2')">Suma tu testimonio</div>
+            <div class="tab" onclick="showTabContent('content3')">Referencias y contactos</div>
+        </div>
+
+        <!-- Contenido de las pestañas -->
+        <div id="content1" class="tab-content">
+            <h2>Información del proyecto</h2>
+            <p>En el marco de un proyecto documental desarrollado por la Facultad de Diseño, Arquitectura y Urbanismo de la Universidad de Buenos Aires, surge esta página web con el propósito de recopilar testimonios y experiencias relacionadas con la maternidad, visibilizando sus múltiples dimensiones. A lo largo de la historia, hemos convivido en una sociedad que, incluso en la actualidad, cuestiona a las mujeres por expresar emociones complejas o ambiguas respecto al acto de maternar. Las reflexiones en torno a la maternidad suelen limitarse a interpretaciones biológicas, culturales o normativas, con frecuencia relegando las voces de las propias mujeres a un segundo plano.</p>
+            <p>Este proyecto busca, precisamente, otorgar protagonismo a las experiencias y perspectivas de las madres, abarcando aspectos como el trabajo, el desarrollo profesional, los deseos personales, las relaciones de pareja, la crianza en solitario y los profundos cambios internos que atraviesan. Cada una de estas áreas contribuye a conformar un tema tan intrincado como universal, que de algún modo nos interpela a todas.</p>
+            <p>Dirigido a madres en toda su diversidad, así como a quienes deseen explorar este universo, nuestra intención es construir una red que funcione como un espacio de refugio y contención. Un lugar donde las emociones —desde las más confusas hasta las más hermosas y ambiguas— encuentren un eco y una comunidad.</p>
+            <button onclick="closeContent1()">Cerrar</button>
+        </div>
+
+        <div id="content2" class="tab-content">
+            <h2>Tu experiencia</h2>
+            <p>Formulario para colaborar y compartir tus vivencias.</p>
+            <button onclick="closeContent2()">Cerrar</button>
+        </div>
+
+        <div id="content3" class="tab-content">
+            <h2>Referencias y contactos</h2>
+            <p>Más datos del proyecto, bibliografía y medios de contacto.</p>
+            <button onclick="closeContent3()">Cerrar</button>
+        </div>
+    </div>
+
+    <script>
+        function showSecondSplash() {
+    // Oculta la primera pantalla
+    const splashScreen = document.getElementById("splashScreen");
+    splashScreen.classList.add("hidden");
+
+    // Muestra la segunda pantalla
+    const secondSplash = document.getElementById("second-splash");
+    secondSplash.classList.add("show");
+
+    // Activa la animación del texto en la segunda pantalla
+    const secondTextBox = secondSplash.querySelector(".splash-text-box");
+    setTimeout(() => {
+        secondTextBox.classList.add("show");
+    }, 10); // Pequeño retraso para aplicar las transiciones
+}
+
+function hideSecondSplash() {
+    // Oculta la segunda pantalla
+    const secondSplash = document.getElementById("second-splash");
+    secondSplash.classList.remove("show");
+
+    // Muestra el contenido principal (si corresponde)
+    const mainContent = document.getElementById("main-content");
+    if (mainContent) {
+        mainContent.style.display = "block";
+        setTimeout(() => {
+            mainContent.classList.add("show");
+        }, 10);
+    }
+}
+        // Función para mostrar o cerrar el contenido de la pestaña seleccionada
+        function showTabContent(tabId) {
+            const selectedTab = document.getElementById(tabId);
+    
+            // Verifica si el contenido ya está activo
+            if (selectedTab.classList.contains('active')) {
+                selectedTab.classList.remove('active'); // Cierra el contenedor
+            } else {
+                // Cierra cualquier otro contenedor activo
+                document.querySelectorAll('.tab-content').forEach(tab => {
+                    tab.classList.remove('active');
+                });
+                // Activa el contenedor seleccionado
+                selectedTab.classList.add('active');
+            }
+        }
+    
+        function closeContent1() {
+    const Content1 = document.getElementById("content1");
+    content1.style.display = "none";
+        }
+
+        function closeContent2() {
+    const Content2 = document.getElementById("content2");
+    content2.style.display = "none";
+        }
+
+        function closeContent3() {
+    const Content3 = document.getElementById("content3");
+    content3.style.display = "none";
+        }
+
+        window.onload = function() {
+    // Al cargar la página, agrega la clase 'show' a la splash-text-box
+    const splashTextBox = document.querySelector('.splash-text-box');
+    setTimeout(() => {
+        splashTextBox.classList.add('show'); // Hace que el cuadro de texto aparezca progresivamente
+    }, 500); // Retraso de 500ms antes de comenzar la transición
+    };
+       
+ function openVideoModal(event) {
+    event.preventDefault(); // Evita el comportamiento predeterminado del clic
+    const modal = document.getElementById("videoModal");
+    modal.style.display = "flex"; // Muestra el modal
+    const clickX = event.pageX;
+    const clickY = event.pageY;
+
+    // Ajusta las coordenadas para posicionar el modal
+    modal.style.left = `${clickX}px`;
+    modal.style.top = `${clickY}px`;
+
+    // Configura el modal como absoluto y muéstralo
+    modal.style.position = "absolute";
+    modal.style.transform = "translate(-50%, -50%)"; // Centra el modal respecto al clic
+    modal.style.display = "flex";
+
+    // Reproduce el video
+    const video = document.getElementById("videoContent");
+    video.play();
+}
+
+function closeVideoModal() {
+    const modal = document.getElementById("videoModal");
+    modal.style.display = "none"; // Oculta el modal
+    const video = document.getElementById("videoContent");
+    video.pause(); // Pausa la reproducción del video
+    video.currentTime = 0; // Reinicia el video (opcional)
+}
+
+// funciones de AUDIO 
+function showAudioPlayer(event) {
+    event.preventDefault(); // Evita el comportamiento predeterminado
+    const audioPlayer = document.getElementById("audioPlayer");
+    const img = document.getElementById("imagen");
+
+    // Coordenadas del clic relativas al documento
+    const clickX = event.pageX;
+    const clickY = event.pageY;
+
+    // Coordenadas de la imagen en la página
+    const imgRect = img.getBoundingClientRect();
+    const offsetX = clickX - imgRect.left; // Ajusta la posición X dentro de la imagen
+    const offsetY = clickY - imgRect.top;  // Ajusta la posición Y dentro de la imagen
+
+    // Ajustar la posición del reproductor de audio relativo a la imagen
+    audioPlayer.style.left = `${offsetX + imgRect.left}px`;
+    audioPlayer.style.top = `${offsetY + imgRect.top}px`;
+    audioPlayer.style.display = "block";
+    audioPlayer.style.zIndex = "50"; // Asegura que esté por encima de otros elementos
+}
+
+function closeAudioPlayer() {
+    const audioPlayer = document.getElementById("audioPlayer");
+    audioPlayer.style.display = "none";
+}
+
+function showAudioPlayer2(event) {
+        event.preventDefault();
+        const audioPlayer2 = document.getElementById("audioPlayer2");
+        const img = document.getElementById("imagen");
+
+        if (!img) {
+            console.log("Imagen no encontrada");
+            return;
+        }
+
+        const clickX = event.pageX;
+        const clickY = event.pageY;
+
+        const imgRect = img.getBoundingClientRect();
+        const offsetX = clickX - imgRect.left;
+        const offsetY = clickY - imgRect.top; // Aquí también necesitamos ajustar el Y
+
+        audioPlayer2.style.left = `${offsetX + imgRect.left}px`;
+        audioPlayer2.style.top = `${offsetY + imgRect.top}px`;
+        audioPlayer2.style.display = "block";
+        audioPlayer2.style.zIndex = "50";
+    }
+
+    // Cerrar el reproductor de audio 2
+    function closeAudioPlayer2() {
+        const audioPlayer2 = document.getElementById("audioPlayer2");
+        audioPlayer2.style.display = "none";
+    }
+// funciones de TEXTO 
+function showTextBox(event) {
+    event.preventDefault(); // Evita el comportamiento predeterminado
+    const textBox = document.getElementById("textBox");
+    const img = document.getElementById("imagen");
+
+    // Coordenadas del clic relativas al documento
+    const clickX = event.pageX;
+    const clickY = event.pageY;
+
+    // Coordenadas de la imagen en la página
+    const imgRect = img.getBoundingClientRect();
+    const offsetX = clickX - imgRect.left; // Ajusta la posición X dentro de la imagen
+    const offsetY = clickY - imgRect.top;  // Ajusta la posición Y dentro de la imagen
+
+    // Ajustar la posición del cuadro de texto relativo a la imagen
+    textBox.style.left = `${offsetX + imgRect.left}px`;
+    textBox.style.top = `${offsetY + imgRect.top}px`;
+    textBox.style.display = "block";
+    textBox.style.zIndex = "50"; // Asegura que esté por encima de otros elementos
+}
+
+function closeTextBox() {
+    const textBox = document.getElementById("textBox");
+    textBox.style.display = "none";
+}
+
+function disableScroll() {
+    document.body.style.overflow = 'hidden';
+}
+function enableScroll() {
+    document.body.style.overflow = '';
+}
+
+function showTextBox2(event) {
+    event.preventDefault(); // Evita el comportamiento predeterminado
+    const textBox2 = document.getElementById("textBox2");
+    const img = document.getElementById("imagen");
+
+    // Coordenadas del clic relativas al documento
+    const clickX = event.pageX;
+    const clickY = event.pageY;
+
+    // Coordenadas de la imagen en la página
+    const imgRect = img.getBoundingClientRect();
+    const offsetX = clickX - imgRect.left; // Ajusta la posición X dentro de la imagen
+    const offsetY = clickY - imgRect.top;  // Ajusta la posición Y dentro de la imagen
+
+    // Ajustar la posición del cuadro de texto relativo a la imagen
+    textBox2.style.left = `${offsetX + imgRect.left}px`;
+    textBox2.style.top = `${offsetY + imgRect.top}px`;
+    textBox2.style.display = "block";
+    textBox2.style.zIndex = "50"; // Asegura que esté por encima de otros elementos
+}
+
+function closeTextBox2() {
+    const textBox2 = document.getElementById("textBox2");
+    textBox2.style.display = "none";
+}
+
+function showTextBox3(event) {
+    event.preventDefault(); // Evita el comportamiento predeterminado
+    const textBox3 = document.getElementById("textBox3");
+    const img = document.getElementById("imagen");
+
+    // Coordenadas del clic relativas al documento
+    const clickX = event.pageX;
+    const clickY = event.pageY;
+
+    // Coordenadas de la imagen en la página
+    const imgRect = img.getBoundingClientRect();
+    const offsetX = clickX - imgRect.left; // Ajusta la posición X dentro de la imagen
+    const offsetY = clickY - imgRect.top;  // Ajusta la posición Y dentro de la imagen
+
+    // Ajustar la posición del cuadro de texto relativo a la imagen
+    textBox3.style.left = `${offsetX + imgRect.left}px`;
+    textBox3.style.top = `${offsetY + imgRect.top}px`;
+    textBox3.style.display = "block";
+    textBox3.style.zIndex = "50"; // Asegura que esté por encima de otros elementos
+}
+
+function closeTextBox3() {
+    const textBox3 = document.getElementById("textBox3");
+    textBox3.style.display = "none";
+}
+
+function showTextBox4(event) {
+    event.preventDefault(); // Evita el comportamiento predeterminado
+    const textBox4 = document.getElementById("textBox4");
+    const img = document.getElementById("imagen");
+
+    // Coordenadas del clic relativas al documento
+    const clickX = event.pageX;
+    const clickY = event.pageY;
+
+    // Coordenadas de la imagen en la página
+    const imgRect = img.getBoundingClientRect();
+    const offsetX = clickX - imgRect.left; // Ajusta la posición X dentro de la imagen
+    const offsetY = clickY - imgRect.top;  // Ajusta la posición Y dentro de la imagen
+
+    // Ajustar la posición del cuadro de texto relativo a la imagen
+    textBox4.style.left = `${offsetX + imgRect.left}px`;
+    textBox4.style.top = `${offsetY + imgRect.top}px`;
+    textBox4.style.display = "block";
+    textBox4.style.zIndex = "50"; // Asegura que esté por encima de otros elementos
+}
+
+function closeTextBox4() {
+    const textBox4 = document.getElementById("textBox4");
+    textBox4.style.display = "none";
+}
+
+function showTextBox5(event) {
+    event.preventDefault(); // Evita el comportamiento predeterminado
+    const textBox5 = document.getElementById("textBox5");
+    const img = document.getElementById("imagen");
+
+    // Coordenadas del clic relativas al documento
+    const clickX = event.pageX;
+    const clickY = event.pageY;
+
+    // Coordenadas de la imagen en la página
+    const imgRect = img.getBoundingClientRect();
+    const offsetX = clickX - imgRect.left; // Ajusta la posición X dentro de la imagen
+    const offsetY = clickY - imgRect.top;  // Ajusta la posición Y dentro de la imagen
+
+    // Ajustar la posición del cuadro de texto relativo a la imagen
+    textBox5.style.left = `${offsetX + imgRect.left}px`;
+    textBox5.style.top = `${offsetY + imgRect.top}px`;
+    textBox5.style.display = "block";
+    textBox5.style.zIndex = "50"; // Asegura que esté por encima de otros elementos
+}
+
+function closeTextBox5() {
+    const textBox5 = document.getElementById("textBox5");
+    textBox5.style.display = "none";
+}
+
+function showTextBox6(event) {
+    event.preventDefault(); 
+    const textBox6 = document.getElementById("textBox6");
+    const img = document.getElementById("imagen");
+
+    const clickX = event.pageX;
+    const clickY = event.pageY;
+
+    const imgRect = img.getBoundingClientRect();
+    const offsetX = clickX - imgRect.left; 
+
+    textBox6.style.left = `${offsetX + imgRect.left}px`;
+    textBox6.style.top = `${offsetY + imgRect.top}px`;
+    textBox6.style.display = "block";
+    textBox6.style.zIndex = "50"; 
+}
+
+function closeTextBox6() {
+    const textBox6 = document.getElementById("textBox6");
+    textBox6.style.display = "none";
+}
+
+function showTextBox7(event) {
+    event.preventDefault(); 
+    const textBox7 = document.getElementById("textBox7");
+    const img = document.getElementById("imagen");
+
+    const clickX = event.pageX;
+    const clickY = event.pageY;
+
+    const imgRect = img.getBoundingClientRect();
+    const offsetX = clickX - imgRect.left; 
+    const offsetY = clickY - imgRect.top;  
+
+    textBox7.style.left = `${offsetX + imgRect.left}px`;
+    textBox7.style.top = `${offsetY + imgRect.top}px`;
+    textBox7.style.display = "block";
+    textBox7.style.zIndex = "50"; 
+}
+
+function closeTextBox7() {
+    const textBox7 = document.getElementById("textBox7");
+    textBox7.style.display = "none";
+}
+    </script>
+</body>
+</html>
